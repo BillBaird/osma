@@ -42,7 +42,7 @@ namespace Osma.Mobile.App.iOS
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new PlatformModule());
-            builder.RegisterModule(new ServicesModule());
+            //builder.RegisterModule(new ServicesModule());                // This is done in the PlatformModule
             var container = builder.Build();
             LoadApplication(new App(container));
 #endif

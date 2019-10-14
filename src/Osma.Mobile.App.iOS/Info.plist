@@ -36,5 +36,7 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.1.0</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Needs camera for QR Reader</string>
 </dict>
 </plist>

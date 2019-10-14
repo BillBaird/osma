@@ -1,0 +1,101 @@
+Public URLs:
+    Use ngrok to expose localhost:port as a public URL
+    
+    For manual execution, assuming port 5000, from terminal:
+        ngrok http 5000
+       
+        Need to take the https endpoint and configure in WebAgent project launchSettings.json.  Add:
+           "ENDPOINT_HOST": "https://3cedaac2.ngrok.io"
+        to the list of environmentVariables.
+        
+        Note that the endpoint is stored in the wallet at wallet creation time, so the wallet and connections must
+        be removed whenever ngrok creates a new tunnel.  To do this, move the .indy_client folder to the trash prior to
+        starting WebAgent:
+           /Users/bill/.local/.indy_client
+       
+    For docker-compose execution:
+        Edited aries-framework-dotnet/scripts files
+        
+        It appears that the phone client (osma in this case) will only call https and not http clients.  Updates to handle
+        this are:
+        
+        start-web-agents.sh
+            Updated line 6 with available port # and also changed http to https (twice)
+            Updated lines 9 and 2 to change http to https
+
+        web-agents-ngrok-config.yaml
+            Update line 1 with same available port # as used in start-web-agents.sh on line 6
+            change bind-tls to true (both places)
+            
+        Available port #s can be found on the mac using NetworkUtility and doing a Port Scan.  The located port numbers
+        are those currently in use, so any other number can be chosen (such as 16938).
+        
+    Querying exposed tunnels
+            http://localhost:16938/api/tunnels
+        Done from a browser, this returns the current tunnel endpoints in XML.  This can also be done via postman
+        to get them in JSON.  Note the port is the one specified above.
+        
+    Installation:
+        ngrok can be installed on OSX by doing:
+            brew cask install ngrok    
+        
+Running OSMA.iOS and the Native Libraries:
+    Critical that the osma/src/Osma/libs libindy.a file match the version used by the aries-framework-dotnet.  This file
+    can be downloaded from 
+        https://repo.sovrin.org/ios/libindy/stable/libindy-core/1.10.1/ 
+    assuming you want version 1.10.1.  Follow the struct to get the proper file.  
+    
+    In the case of iOS, the
+        libindy-aarch64-armv7.tar.gz
+    file should be downloaded and expanded (double click on it).  Copy the libindy.a file in to the path listed above.
+    
+    For running on the mac (webagent, etc.) the correct files should be downloaded from
+        https://repo.sovrin.org/macos/libindy/stable/1.10.1/
+    based on the release you want.  Both libindy.a and libindy.dylib should be copied into
+        /usr/lib
+    
+Main documentation starting point:
+        https://github.com/hyperledger/indy-sdk
+    The README.md is the main starting point all indy-sdk documentation.
+    
+Useful URLs:
+    https://github.com/hyperledger/indy-sdk
+    https://github.com/BillBaird/indy-sdk/blob/master/docs/getting-started/indy-walkthrough.md
+        Main starting point for everything indy-sdk (and fork)
+    https://ngrok.com/docs
+        ngrok documentation
+    https://levelup.gitconnected.com/expose-localhost-as-a-public-url-and-debug-using-ngrok-8912a91e6740
+        ngrok article
+    https://autofac.readthedocs.io/en/latest/getting-started/index.html
+        Autofac dependency injection docs
+    https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel
+        MVVM pattern description, which is used by OSMA
+    https://github.com/mattrglobal/osma
+    https://github.com/BillBaird/osma/blob/master/README.md
+        OSMA repo & fork
+    https://github.com/UXDivers/Gorilla-Player-Support/wiki/Getting-Started
+        Gorilla player docs
+    https://grialkit.com/gorilla-player/
+        Gorilla player live preview    
+    https://github.com/streetcred-id/aries-mobile-starter-pack
+        StreetCred-Id aries mobile starter pack        
+    https://github.com/hyperledger/aries-rfcs
+        Aries RFCs
+    https://medium.com/decentralized-identity/rhythm-and-melody-how-hubs-and-agents-rock-together-ac2dd6bf8cf4
+        Using hubs and agents together
+    http://www.windley.com/archives/2018/10/decentralization_in_sovrin.shtml
+        Decentralization guide for Sovrin
+    https://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/
+        How static and dynamic libaries work in iOS
+    https://sovrin.org/developers/
+        Sovrin developer portal        
+    https://www.youtube.com/watch?v=PXPZQB3VG9w
+        Nathan George YouTube overview
+    https://agent-framework.readthedocs.io/en/latest/samples.html#running-the-unit-tests
+    https://agent-framework.readthedocs.io/en/latest/xamarin.html
+        agent framework docs
+                          
+
+Other things:
+    I had to do a chmod +x on start-web-agents.sh so that it was executable
+    I had to add the camera to the iOS plist file in order to get permission to use the camera   

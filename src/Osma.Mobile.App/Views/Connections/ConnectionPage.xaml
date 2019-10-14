@@ -158,7 +158,7 @@
                                 Aspect="AspectFit"
                             />
                             <Label
-                                Text="{Binding TheirDid, StringFormat='did:  {0}'}"
+                                Text="{Binding TheirDid, StringFormat='Their did:  {0}'}"
                                 TextColor="Black"
                                 FontSize="Small"
                             />
@@ -177,7 +177,7 @@
                                 Aspect="AspectFit"
                             />
                             <Label
-                                Text="{Binding MyDid, StringFormat='did:  {0}'}"
+                                Text="{Binding MyDid, StringFormat='My did:  {0}'}"
                                 TextColor="Black"
                                 FontSize="Small"
                             />

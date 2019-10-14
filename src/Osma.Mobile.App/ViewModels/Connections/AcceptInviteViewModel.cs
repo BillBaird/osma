@@ -61,7 +61,8 @@ namespace Osma.Mobile.App.ViewModels.Connections
             var rsp = await _messageService.SendAsync(context.Wallet, msg, rec, _invite.RecipientKeys.First(), isEndpointUriAbsent);
             if (isEndpointUriAbsent)
             {
-                await _connectionService.ProcessResponseAsync(context, rsp.GetMessage<ConnectionResponseMessage>(), rec);
+                var response = rsp.GetMessage<ConnectionResponseMessage>();
+                await _connectionService.ProcessResponseAsync(context, response, rec);
             }
         }
 

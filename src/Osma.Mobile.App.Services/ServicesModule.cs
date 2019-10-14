@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using AgentFramework.Core.Contracts;
 using AgentFramework.Core.Handlers.Agents;
+using AgentFramework.Core.Runtime;
 using AgentFramework.Core.Runtime.Transport;
 using Autofac;
 
@@ -19,6 +20,10 @@ namespace Osma.Mobile.App.Services
             builder
                 .RegisterType<HttpClientHandler>()
                 .As<HttpMessageHandler>();
+
+            builder
+                .RegisterType<TrivialHttpClientFactory>()
+                .As<IHttpClientFactory>();
 
             builder
                 .RegisterType<EventAggregator>()
@@ -80,6 +85,10 @@ namespace Osma.Mobile.App.Services
                 .SingleInstance();
 
             builder.RegisterType<DefaultTailsService>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterType<DefaultPaymentService>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
