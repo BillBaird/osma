@@ -56,6 +56,8 @@
                                 <RowDefinition Height="64"/>
                                 <RowDefinition Height="32" />
                                 <RowDefinition Height="32" />
+                                <RowDefinition Height="16" />
+                                <RowDefinition Height="16" />
 
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -109,6 +111,24 @@
                                 FontSize="Small"
                                 TextColor="{StaticResource NavigationBarTextColor}"
                                 Text="{ Binding ConnectionSubtitle }"
+                                HorizontalTextAlignment="Center"
+                            />
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                FontSize="Small"
+                                TextColor="{StaticResource NavigationBarTextColor}"
+                                Text="{ Binding MyDid, StringFormat='My did:  {0}' }"
+                                HorizontalTextAlignment="Center"
+                            />
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                FontSize="Small"
+                                TextColor="{StaticResource NavigationBarTextColor}"
+                                Text="{ Binding TheirDid, StringFormat='Their did:  {0}' }"
                                 HorizontalTextAlignment="Center"
                             />
                     </Grid>

@@ -27,7 +27,10 @@ namespace Osma.Mobile.App
                 .SingleInstance();
 
             builder
-                .Register(_ => new LoggerFactory())
+                .Register(_ => new LoggerFactory()
+                    .AddConsole(LogLevel.Trace)
+                    .AddDebug(LogLevel.Trace)
+                    )
                 .As<ILoggerFactory>()
                 .SingleInstance();
 

@@ -74,7 +74,7 @@ namespace Osma.Mobile.App.ViewModels.Connections
                 var response = await _messageService.SendAsync(context.Wallet, message, _record, null, true);
                 protocols = response.GetMessage<DiscoveryDiscloseMessage>();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //Swallow exception
                 //TODO more granular error protection

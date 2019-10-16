@@ -25,6 +25,8 @@ namespace Osma.Mobile.App
 {
     public partial class App : Application
     {
+        internal static IContainer Container { get; private set; }
+
         public new static App Current => Application.Current as App;
         public Palette Colors;
 
@@ -38,6 +40,7 @@ namespace Osma.Mobile.App
             Colors.Init();
             _navigationService = container.Resolve<INavigationService>();
             _contextProvider = container.Resolve<ICustomAgentContextProvider>();
+            Container = container;
 
             InitializeTask = Initialize();
         }

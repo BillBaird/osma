@@ -4,6 +4,7 @@ using Acr.UserDialogs;
 using AgentFramework.Core.Models.Wallets;
 using Osma.Mobile.App.Services.Interfaces;
 using Osma.Mobile.App.Services.Models;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Osma.Mobile.App.ViewModels
@@ -41,7 +42,8 @@ namespace Osma.Mobile.App.ViewModels
                 {
                     WalletConfiguration = new WalletConfiguration {Id = Guid.NewGuid().ToString() },
                     WalletCredentials = new WalletCredentials {Key = "LocalWalletKey" }
-                }
+                },
+                Name = DeviceInfo.Name + " agent"
             };
 
             if (await _agentContextProvider.CreateAgentAsync(options))

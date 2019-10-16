@@ -6,9 +6,17 @@ using Acr.UserDialogs;
 using AgentFramework.Core.Contracts;
 using AgentFramework.Core.Messages.Connections;
 using AgentFramework.Core.Exceptions;
+using AgentFramework.Core.Extensions;
+using AgentFramework.Core.Models;
+using AgentFramework.Core.Utils;
+using Autofac;
+using Hyperledger.Indy.Utils;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Osma.Mobile.App.Events;
 using Osma.Mobile.App.Services.Interfaces;
 using ReactiveUI;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Osma.Mobile.App.ViewModels.Connections
@@ -55,13 +63,26 @@ namespace Osma.Mobile.App.ViewModels.Connections
 
         private async Task CreateConnection(IAgentContext context, ConnectionInvitationMessage invite)
         {
+            var logger = App.Container.Resolve<ILogger<AcceptInviteViewModel>>();
+            var fmt = new JsonSerializerSettings {Formatting = Formatting.Indented};
+            logger.LogTrace($"context = {context.ToJson(fmt)}");
+            logger.LogTrace($"_invite = {_invite.ToJson(fmt)}");
+
             var provisioningRecord = await _provisioningService.GetProvisioningAsync(context.Wallet);
+            logger.LogTrace($"provisioningRecord = {provisioningRecord.ToJson(new JsonSerializerSettings{Formatting = Formatting.Indented})}");
+            
             var isEndpointUriAbsent = provisioningRecord.Endpoint.Uri == null;
             var (msg, rec) = await _connectionService.CreateRequestAsync(context, _invite);
+            msg.Label = DeviceInfo.Name + " agent";
+            logger.LogTrace($"msg = {msg.ToJson(fmt)}");
+            logger.LogTrace($"rec = {rec.ToJson(fmt)}");
+            
             var rsp = await _messageService.SendAsync(context.Wallet, msg, rec, _invite.RecipientKeys.First(), isEndpointUriAbsent);
+            logger.LogTrace($"rsp = {rsp.ToJson(fmt)}");
             if (isEndpointUriAbsent)
             {
                 var response = rsp.GetMessage<ConnectionResponseMessage>();
+                logger.LogTrace($"response = {response.ToJson(fmt)}");
                 await _connectionService.ProcessResponseAsync(context, response, rec);
             }
         }
