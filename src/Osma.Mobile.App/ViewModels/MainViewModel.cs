@@ -5,6 +5,7 @@ using Osma.Mobile.App.ViewModels.Account;
 using Osma.Mobile.App.ViewModels.Connections;
 using Osma.Mobile.App.ViewModels.CreateInvitation;
 using Osma.Mobile.App.ViewModels.Credentials;
+using Osma.Mobile.App.ViewModels.Wallet;
 using ReactiveUI;
 
 namespace Osma.Mobile.App.ViewModels
@@ -17,6 +18,7 @@ namespace Osma.Mobile.App.ViewModels
             ConnectionsViewModel connectionsViewModel,
             CredentialsViewModel credentialsViewModel,
             AccountViewModel accountViewModel,
+            WalletViewModel walletViewModel,
             CreateInvitationViewModel createInvitationViewModel
         ) : base(
                 nameof(MainViewModel),
@@ -27,6 +29,7 @@ namespace Osma.Mobile.App.ViewModels
             Connections = connectionsViewModel;
             Credentials = credentialsViewModel;
             Account = accountViewModel;
+            Wallet = walletViewModel;
             CreateInvitation = createInvitationViewModel;
         }
 
@@ -35,6 +38,7 @@ namespace Osma.Mobile.App.ViewModels
             await Connections.InitializeAsync(null);
             await Credentials.InitializeAsync(null);
             await Account.InitializeAsync(null);
+            await Wallet.InitializeAsync(null);
             await CreateInvitation.InitializeAsync(null);
             await base.InitializeAsync(navigationData);
         }
@@ -59,6 +63,13 @@ namespace Osma.Mobile.App.ViewModels
         {
             get => _account;
             set => this.RaiseAndSetIfChanged(ref _account, value);
+        }
+
+        private WalletViewModel _wallet;
+        public WalletViewModel Wallet
+        {
+            get => _wallet;
+            set => this.RaiseAndSetIfChanged(ref _wallet, value);
         }
 
         private CreateInvitationViewModel _createInvitation;

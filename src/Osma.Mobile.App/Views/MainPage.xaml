@@ -5,6 +5,7 @@
     xmlns:connections="clr-namespace:Osma.Mobile.App.Views.Connections;assembly=Osma.Mobile.App"
     xmlns:credentials="clr-namespace:Osma.Mobile.App.Views.Credentials;assembly=Osma.Mobile.App"
     xmlns:account="clr-namespace:Osma.Mobile.App.Views.Account;assembly=Osma.Mobile.App"
+    xmlns:wallet="clr-namespace:Osma.Mobile.App.Views.Wallet;assembly=Osma.Mobile.App"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     x:Class="Osma.Mobile.App.Views.MainPage"
     CurrentPageChanged="CurrentPageChanged"
@@ -25,4 +26,9 @@
         ios:NavigationPage.PrefersLargeTitles="true"
         BindingContext="{Binding Account}">
     </account:AccountPage>
+    <wallet:WalletPage
+        Icon="info_icon.png"
+        ios:NavigationPage.PrefersLargeTitles="true"
+        BindingContext="{Binding Wallet}">
+    </wallet:WalletPage>
 </TabbedPage>
