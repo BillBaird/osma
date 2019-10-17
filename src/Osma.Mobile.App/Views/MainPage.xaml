@@ -27,7 +27,7 @@
         BindingContext="{Binding Account}">
     </account:AccountPage>
     <wallet:WalletPage
-        Icon="info_icon.png"
+        Icon="security_icon.png"
         ios:NavigationPage.PrefersLargeTitles="true"
         BindingContext="{Binding Wallet}">
     </wallet:WalletPage>

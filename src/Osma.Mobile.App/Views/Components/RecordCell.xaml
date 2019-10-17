@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          x:Class="Osma.Mobile.App.Views.Components.RecordCell"
+>
+    <ViewCell.View>
+        <StackLayout>
+            <Label
+                x:Name="RecordTypeLabel"
+                VerticalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                TextColor="Black"
+            />
+            <Label
+                x:Name="JsonLabel"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                FontSize="Small"
+                TextColor="DarkBlue"
+            />
+            <Label
+                x:Name="JsonTagsLabel"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                FontSize="Small"
+                TextColor="DarkOliveGreen"
+            />
+        </StackLayout>
+    </ViewCell.View>
+</ViewCell>
