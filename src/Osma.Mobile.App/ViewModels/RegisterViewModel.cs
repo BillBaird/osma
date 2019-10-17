@@ -43,7 +43,7 @@ namespace Osma.Mobile.App.ViewModels
                     WalletConfiguration = new WalletConfiguration {Id = Guid.NewGuid().ToString() },
                     WalletCredentials = new WalletCredentials {Key = "LocalWalletKey" }
                 },
-                Name = DeviceInfo.Name + " agent"
+                Name = DeviceInfo.Name + " osma agent"
             };
 
             if (await _agentContextProvider.CreateAgentAsync(options))

@@ -73,7 +73,7 @@ namespace Osma.Mobile.App.ViewModels.Connections
             
             var isEndpointUriAbsent = provisioningRecord.Endpoint.Uri == null;
             var (msg, rec) = await _connectionService.CreateRequestAsync(context, _invite);
-            msg.Label = DeviceInfo.Name + " agent";
+            msg.Label = DeviceInfo.Name + " osma agent";
             logger.LogTrace($"msg = {msg.ToJson(fmt)}");
             logger.LogTrace($"rec = {rec.ToJson(fmt)}");
             
