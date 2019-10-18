@@ -24,11 +24,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <MtouchExtraArgs>-gcc_flags -dead_strip -v</MtouchExtraArgs>
-    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -326,27 +325,50 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <NativeReference Include="libs\libcrypto.a">
+  <ItemGroup Condition=" '$(Platform)' == 'iPhone' ">
+    <NativeReference Include="libs\iPhone\libcrypto.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
-    <NativeReference Include="libs\libsodium.a">
+    <NativeReference Include="libs\iPhone\libindy.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
-    <NativeReference Include="libs\libssl.a">
+    <NativeReference Include="libs\iPhone\libsodium.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
-    <NativeReference Include="libs\libzmq.a">
+    <NativeReference Include="libs\iPhone\libssl.a">
+      <Kind>Static</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+    <NativeReference Include="libs\iPhone\libzmq.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
       <IsCxx>True</IsCxx>
     </NativeReference>
-    <NativeReference Include="libs\libindy.a">
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Platform)' == 'iPhoneSimulator' ">
+    <NativeReference Include="libs\iPhoneSimulator\libcrypto.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
+    </NativeReference>
+    <NativeReference Include="libs\iPhoneSimulator\libindy.a">
+      <Kind>Static</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+    <NativeReference Include="libs\iPhoneSimulator\libsodium.a">
+      <Kind>Static</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+    <NativeReference Include="libs\iPhoneSimulator\libssl.a">
+      <Kind>Static</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+    <NativeReference Include="libs\iPhoneSimulator\libzmq.a">
+      <Kind>Static</Kind>
+      <SmartLink>False</SmartLink>
+      <IsCxx>True</IsCxx>
     </NativeReference>
   </ItemGroup>
   <!--

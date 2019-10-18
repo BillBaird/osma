@@ -86,5 +86,43 @@ namespace Osma.Mobile.App.Utilities
             sb.Append('}');
             return sb.ToString();
         }
+        
+        public static string Head(this string s, char c) {
+            int pos = s.IndexOf(c);
+            return pos >= 0 ? s.Substring(0, pos) : "";
+        }
+
+        public static string Head(this string s, string subStr) {
+            int pos = s.IndexOf(subStr);
+            return pos >= 0 ? s.Substring(0, pos) : "";
+        }
+
+        public static string Tail(this string s, char c) {
+            int pos = s.IndexOf(c);
+            return pos >= 0 && pos < s.Length ? s.Substring(pos + 1) : "";
+        }
+
+        public static string Tail(this string s, string subStr) {
+            int pos = s.IndexOf(subStr);
+            return pos >= 0 && pos < s.Length ? s.Substring(pos + subStr.Length) : "";
+        }
+
+        public static string LDrop(this string s, int count)
+        {
+            if (string.IsNullOrEmpty(s))
+                return s;
+            if (count >= s.Length)
+                return string.Empty;
+            return s.Substring(count);
+        }
+
+        public static string RDrop(this string s, int count)
+        {
+            if (string.IsNullOrEmpty(s))
+                return s;
+            if (count >= s.Length)
+                return string.Empty;
+            return s.Substring(0, s.Length - count);
+        }
     }
 }

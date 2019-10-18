@@ -15,6 +15,7 @@ using Osma.Mobile.App.Services;
 using Osma.Mobile.App.Services.Interfaces;
 using Osma.Mobile.App.ViewModels.CreateInvitation;
 using ReactiveUI;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 
@@ -77,6 +78,14 @@ namespace Osma.Mobile.App.ViewModels.Connections
 
         public async Task ScanInvite()
         {
+            if (DeviceInfo.DeviceType == DeviceType.Physical)
+                await ScanPhysicalInviteAsync();
+            else
+                await ScanTextInviteAsync();
+        }
+
+        private async Task ScanPhysicalInviteAsync()
+        {
             var expectedFormat = ZXing.BarcodeFormat.QR_CODE;
             var opts = new ZXing.Mobile.MobileBarcodeScanningOptions{ PossibleFormats = new List<ZXing.BarcodeFormat> { expectedFormat }};
 
@@ -105,6 +114,11 @@ namespace Osma.Mobile.App.ViewModels.Connections
             };
 
             await NavigationService.NavigateToAsync((Page)scannerPage, NavigationType.Modal);
+        }
+
+        private async Task ScanTextInviteAsync()
+        {
+            await NavigationService.NavigateToAsync<TextInviteViewModel>();
         }
 
         public async Task SelectConnection(ConnectionViewModel connection) => await NavigationService.NavigateToAsync(connection);

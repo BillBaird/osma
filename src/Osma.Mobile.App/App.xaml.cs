@@ -54,6 +54,7 @@ namespace Osma.Mobile.App
             _navigationService.AddPageViewModelBinding<MainViewModel, MainPage>();
             _navigationService.AddPageViewModelBinding<ConnectionsViewModel, ConnectionsPage>();
             _navigationService.AddPageViewModelBinding<ConnectionViewModel, ConnectionPage>();
+            _navigationService.AddPageViewModelBinding<TextInviteViewModel, TextInvitePage>();
             _navigationService.AddPageViewModelBinding<RegisterViewModel, RegisterPage>();
             _navigationService.AddPageViewModelBinding<AcceptInviteViewModel, AcceptInvitePage>();
             _navigationService.AddPageViewModelBinding<CredentialsViewModel, CredentialsPage>();
