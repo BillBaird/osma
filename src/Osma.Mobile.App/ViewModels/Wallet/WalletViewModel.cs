@@ -62,7 +62,26 @@ namespace Osma.Mobile.App.ViewModels.Wallet
             var wallet = context.Wallet;
             
             var provisioningRecords = await _recordService.SearchAsync<ProvisioningRecord>(wallet, null, null, 100);
+            
             var connectionRecords = await _recordService.SearchAsync<ConnectionRecord>(wallet, null, null, 100);
+            connectionRecords.Sort((a, b) =>
+                a.CreatedAtUtc.GetValueOrDefault(DateTime.MinValue) <
+                b.CreatedAtUtc.GetValueOrDefault(DateTime.MinValue)
+                    ? -1
+                    : a.CreatedAtUtc.GetValueOrDefault(DateTime.MinValue) >
+                      b.CreatedAtUtc.GetValueOrDefault(DateTime.MinValue)
+                        ? 1 : 0
+            );
+            
+            var messageRecords = await _recordService.SearchAsync<BasicMessageRecord>(wallet, null, null, 100);
+            messageRecords.Sort((a, b) =>
+                a.CreatedAtUtc.GetValueOrDefault(DateTime.MinValue) <
+                b.CreatedAtUtc.GetValueOrDefault(DateTime.MinValue)
+                    ? -1
+                    : a.CreatedAtUtc.GetValueOrDefault(DateTime.MinValue) >
+                      b.CreatedAtUtc.GetValueOrDefault(DateTime.MinValue)
+                        ? 1 : 0
+            );
 
             IList<RecordViewModel> recordVms = new List<RecordViewModel>();
             foreach (var record in provisioningRecords)
@@ -71,6 +90,11 @@ namespace Osma.Mobile.App.ViewModels.Wallet
                 recordVms.Add(connection);
             }
             foreach (var record in connectionRecords)
+            {
+                var connection = _scope.Resolve<RecordViewModel>(new NamedParameter("record", record));
+                recordVms.Add(connection);
+            }
+            foreach (var record in messageRecords)
             {
                 var connection = _scope.Resolve<RecordViewModel>(new NamedParameter("record", record));
                 recordVms.Add(connection);

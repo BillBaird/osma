@@ -74,8 +74,8 @@ namespace Osma.Mobile.App.ViewModels.Connections
             var isEndpointUriAbsent = provisioningRecord.Endpoint.Uri == null;
             var (msg, rec) = await _connectionService.CreateRequestAsync(context, _invite);
             msg.Label = DeviceInfo.Name + " osma agent";
-            logger.LogTrace($"msg = {msg.ToJson(fmt)}");
-            logger.LogTrace($"rec = {rec.ToJson(fmt)}");
+            logger.LogTrace($"Connection Message (msg) being Sent = {msg.ToJson(fmt)}");
+            logger.LogTrace($"ConnectionRecord (rec) being saved = {rec.ToJson(fmt)}");
             
             var rsp = await _messageService.SendAsync(context.Wallet, msg, rec, _invite.RecipientKeys.First(), isEndpointUriAbsent);
             logger.LogTrace($"rsp = {rsp.ToJson(fmt)}");

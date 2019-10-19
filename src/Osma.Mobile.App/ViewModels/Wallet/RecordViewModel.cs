@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using Acr.UserDialogs;
 using AgentFramework.Core.Extensions;
 using AgentFramework.Core.Models.Records;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Osma.Mobile.App.Services.Interfaces;
 using Osma.Mobile.App.Utilities;
 using ReactiveUI;
@@ -11,7 +13,7 @@ namespace Osma.Mobile.App.ViewModels.Wallet
 {
     public class RecordViewModel : ABaseViewModel
     {
-        private static JsonSerializerSettings fmt = new JsonSerializerSettings {Formatting = Formatting.Indented};
+        private static JsonSerializerSettings fmt = new JsonSerializerSettings {Formatting = Formatting.Indented, Converters = new List<JsonConverter>{ new StringEnumConverter() }};
         
         private readonly RecordBase _record;
 
